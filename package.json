@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vibetemplate/app_enerator.git"
+    "url": "git+https://github.com/vibetemplate/app_generator.git"
   },
   "keywords": [
     "flutter",
@@ -30,9 +30,9 @@
   "author": "VibeTemplate",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vibetemplate/app_enerator/issues"
+    "url": "https://github.com/vibetemplate/app_generator/issues"
   },
-  "homepage": "https://github.com/vibetemplate/app_enerator#readme",
+  "homepage": "https://github.com/vibetemplate/app_generator#readme",
   "devDependencies": {
     "ajv-cli": "^5.0.0"
   },

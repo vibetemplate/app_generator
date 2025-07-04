@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/vibetemplate/app_enerator/schemas/flutter-config.schema.json",
+  "$id": "https://github.com/vibetemplate/app_generator/schemas/flutter-config.schema.json",
   "title": "Flutter移动应用配置Schema",
   "description": "Flutter移动应用生成器的配置文件验证Schema",
   "type": "object",

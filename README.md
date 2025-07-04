@@ -12,8 +12,8 @@
 1. **理解需求**：首先询问我的应用类型和主要功能需求
 
 2. **配置生成**：根据我的需求，创建flutter-config.json配置文件，遵循以下规范：
-   - 参考：https://github.com/vibetemplate/app_enerator/blob/main/FLUTTER-SPEC.md
-   - 验证：https://github.com/vibetemplate/app_enerator/blob/main/schemas/flutter-config.schema.json
+   - 参考：https://github.com/vibetemplate/app_generator/blob/main/FLUTTER-SPEC.md
+   - 验证：https://github.com/vibetemplate/app_generator/blob/main/schemas/flutter-config.schema.json
 
 3. **代码实现**：基于配置文件生成完整的项目，包括：
    - 最新Flutter 3.x架构和Dart语言
@@ -26,12 +26,12 @@
    - 打包配置(Android/iOS)
 
 4. **参考示例**：
-   - 电商购物应用：https://github.com/vibetemplate/app_enerator/tree/main/examples/ecommerce-app
-   - 社交聊天应用：https://github.com/vibetemplate/app_enerator/tree/main/examples/chat-app
-   - 健康运动应用：https://github.com/vibetemplate/app_enerator/tree/main/examples/fitness-app
+   - 电商购物应用：https://github.com/vibetemplate/app_generator/tree/main/examples/ecommerce-app
+   - 社交聊天应用：https://github.com/vibetemplate/app_generator/tree/main/examples/chat-app
+   - 健康运动应用：https://github.com/vibetemplate/app_generator/tree/main/examples/fitness-app
 
 5. **组件模板**：使用预设组件加速开发：
-   - https://github.com/vibetemplate/app_enerator/tree/main/templates
+   - https://github.com/vibetemplate/app_generator/tree/main/templates
 
 请开始询问我的具体需求吧！
 ```
@@ -49,8 +49,8 @@
 
 1. 克隆项目
 ```bash
-git clone https://github.com/vibetemplate/app_enerator.git
-cd app_enerator
+git clone https://github.com/vibetemplate/app_generator.git
+cd app_generator
 ```
 
 2. 查看配置规范
@@ -74,7 +74,7 @@ vim my-app-config.json
 ## 📁 项目结构
 
 ```
-app_enerator/
+app_generator/
 ├── README.md                  # 本文档
 ├── FLUTTER-SPEC.md           # 配置规范文档
 ├── schemas/                  # JSON Schema验证
