@@ -1,0 +1,1316 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/vibetemplate/app_enerator/schemas/flutter-config.schema.json",
+  "title": "Flutter移动应用配置Schema",
+  "description": "Flutter移动应用生成器的配置文件验证Schema",
+  "type": "object",
+  "required": [
+    "app",
+    "platform",
+    "ui",
+    "stateManagement"
+  ],
+  "properties": {
+    "app": {
+      "type": "object",
+      "description": "应用基础信息",
+      "required": [
+        "name",
+        "displayName",
+        "description",
+        "version",
+        "bundleId"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "应用名称（英文，用于包名）",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "displayName": {
+          "type": "string",
+          "description": "应用显示名称",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "应用描述",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "version": {
+          "type": "string",
+          "description": "应用版本号",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9-_.]+)?$"
+        },
+        "bundleId": {
+          "type": "string",
+          "description": "应用包标识符",
+          "pattern": "^[a-zA-Z0-9._-]+$",
+          "minLength": 3,
+          "maxLength": 100
+        },
+        "author": {
+          "type": "string",
+          "description": "作者信息",
+          "maxLength": 100
+        },
+        "homepage": {
+          "type": "string",
+          "description": "应用官网",
+          "format": "uri"
+        },
+        "keywords": {
+          "type": "array",
+          "description": "关键词",
+          "items": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "maxItems": 10
+        },
+        "category": {
+          "type": "string",
+          "description": "应用分类",
+          "default": "productivity",
+          "enum": [
+            "productivity",
+            "entertainment",
+            "utilities",
+            "shopping",
+            "social",
+            "health",
+            "education",
+            "finance",
+            "travel",
+            "music",
+            "photo",
+            "games",
+            "news",
+            "business",
+            "lifestyle",
+            "sports",
+            "weather",
+            "navigation",
+            "food",
+            "medical"
+          ]
+        }
+      }
+    },
+    "platform": {
+      "type": "object",
+      "description": "平台支持配置",
+      "properties": {
+        "android": {
+          "type": "object",
+          "description": "Android平台配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否支持Android",
+              "default": true
+            },
+            "minSdkVersion": {
+              "type": "integer",
+              "description": "最低SDK版本",
+              "minimum": 16,
+              "maximum": 34,
+              "default": 21
+            },
+            "targetSdkVersion": {
+              "type": "integer",
+              "description": "目标SDK版本",
+              "minimum": 21,
+              "maximum": 34,
+              "default": 34
+            },
+            "compileSdkVersion": {
+              "type": "integer",
+              "description": "编译SDK版本",
+              "minimum": 21,
+              "maximum": 34,
+              "default": 34
+            },
+            "applicationId": {
+              "type": "string",
+              "description": "Android应用ID",
+              "pattern": "^[a-zA-Z0-9._-]+$"
+            },
+            "versionCode": {
+              "type": "integer",
+              "description": "版本代码",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "default": 1
+            },
+            "supportedABIs": {
+              "type": "array",
+              "description": "支持的架构",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "armeabi-v7a",
+                  "arm64-v8a",
+                  "x86",
+                  "x86_64"
+                ]
+              },
+              "default": [
+                "arm64-v8a",
+                "armeabi-v7a"
+              ]
+            }
+          }
+        },
+        "ios": {
+          "type": "object",
+          "description": "iOS平台配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否支持iOS",
+              "default": true
+            },
+            "deploymentTarget": {
+              "type": "string",
+              "description": "部署目标版本",
+              "pattern": "^\\d+\\.\\d+$",
+              "default": "11.0"
+            },
+            "bundleIdentifier": {
+              "type": "string",
+              "description": "Bundle标识符",
+              "pattern": "^[a-zA-Z0-9._-]+$"
+            },
+            "teamId": {
+              "type": "string",
+              "description": "开发者团队ID",
+              "pattern": "^[A-Z0-9]{10}$"
+            },
+            "supportedDevices": {
+              "type": "array",
+              "description": "支持的设备",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "iphone",
+                  "ipad"
+                ]
+              },
+              "default": [
+                "iphone",
+                "ipad"
+              ]
+            }
+          }
+        },
+        "web": {
+          "type": "object",
+          "description": "Web平台配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否支持Web",
+              "default": false
+            },
+            "renderer": {
+              "type": "string",
+              "description": "渲染器",
+              "enum": [
+                "html",
+                "canvaskit"
+              ],
+              "default": "html"
+            },
+            "baseHref": {
+              "type": "string",
+              "description": "基础路径",
+              "default": "/"
+            }
+          }
+        },
+        "desktop": {
+          "type": "object",
+          "description": "桌面平台配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否支持桌面",
+              "default": false
+            },
+            "windows": {
+              "type": "boolean",
+              "description": "是否支持Windows",
+              "default": false
+            },
+            "macos": {
+              "type": "boolean",
+              "description": "是否支持macOS",
+              "default": false
+            },
+            "linux": {
+              "type": "boolean",
+              "description": "是否支持Linux",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "description": "用户界面配置",
+      "required": [
+        "theme"
+      ],
+      "properties": {
+        "theme": {
+          "type": "string",
+          "description": "UI主题",
+          "enum": [
+            "material3",
+            "material2",
+            "cupertino",
+            "custom"
+          ]
+        },
+        "primaryColor": {
+          "type": "string",
+          "description": "主色调",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#2196F3"
+        },
+        "secondaryColor": {
+          "type": "string",
+          "description": "辅助色",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#03DAC6"
+        },
+        "backgroundColor": {
+          "type": "string",
+          "description": "背景色",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#FFFFFF"
+        },
+        "surfaceColor": {
+          "type": "string",
+          "description": "表面色",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#F5F5F5"
+        },
+        "errorColor": {
+          "type": "string",
+          "description": "错误色",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#B00020"
+        },
+        "supportDarkMode": {
+          "type": "boolean",
+          "description": "是否支持暗黑模式",
+          "default": true
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "字体家族",
+          "default": "Roboto"
+        },
+        "customFonts": {
+          "type": "array",
+          "description": "自定义字体",
+          "items": {
+            "type": "string"
+          }
+        },
+        "iconTheme": {
+          "type": "string",
+          "description": "图标主题",
+          "enum": [
+            "material",
+            "cupertino"
+          ],
+          "default": "material"
+        },
+        "appBarStyle": {
+          "type": "string",
+          "description": "应用栏样式",
+          "enum": [
+            "normal",
+            "transparent",
+            "elevated"
+          ],
+          "default": "normal"
+        },
+        "navigationStyle": {
+          "type": "string",
+          "description": "导航样式",
+          "enum": [
+            "bottom",
+            "drawer",
+            "rail"
+          ],
+          "default": "bottom"
+        },
+        "responsiveLayout": {
+          "type": "boolean",
+          "description": "响应式布局",
+          "default": true
+        },
+        "animations": {
+          "type": "object",
+          "description": "动画配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用动画",
+              "default": true
+            },
+            "duration": {
+              "type": "integer",
+              "description": "动画时长(毫秒)",
+              "minimum": 100,
+              "maximum": 2000,
+              "default": 300
+            },
+            "curve": {
+              "type": "string",
+              "description": "动画曲线",
+              "enum": [
+                "linear",
+                "easeIn",
+                "easeOut",
+                "easeInOut",
+                "fastOutSlowIn",
+                "bounceIn",
+                "bounceOut"
+              ],
+              "default": "easeInOut"
+            }
+          }
+        }
+      }
+    },
+    "stateManagement": {
+      "type": "object",
+      "description": "状态管理配置",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "状态管理方案",
+          "enum": [
+            "riverpod",
+            "provider",
+            "bloc",
+            "getx",
+            "setState"
+          ]
+        },
+        "globalState": {
+          "type": "boolean",
+          "description": "是否使用全局状态",
+          "default": true
+        },
+        "persistence": {
+          "type": "boolean",
+          "description": "是否持久化状态",
+          "default": true
+        },
+        "devTools": {
+          "type": "boolean",
+          "description": "是否启用开发工具",
+          "default": true
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "description": "功能特性配置",
+      "properties": {
+        "authentication": {
+          "type": "object",
+          "description": "认证配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用认证",
+              "default": false
+            },
+            "providers": {
+              "type": "array",
+              "description": "认证提供商",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "email",
+                  "phone",
+                  "google",
+                  "apple",
+                  "facebook",
+                  "twitter",
+                  "github"
+                ]
+              }
+            },
+            "biometrics": {
+              "type": "boolean",
+              "description": "是否支持生物识别",
+              "default": false
+            },
+            "twoFactor": {
+              "type": "boolean",
+              "description": "是否支持双因子认证",
+              "default": false
+            }
+          }
+        },
+        "push": {
+          "type": "object",
+          "description": "推送通知配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用推送通知",
+              "default": false
+            },
+            "provider": {
+              "type": "string",
+              "description": "推送服务提供商",
+              "enum": [
+                "firebase",
+                "onesignal",
+                "pusher",
+                "custom"
+              ],
+              "default": "firebase"
+            },
+            "localNotifications": {
+              "type": "boolean",
+              "description": "是否支持本地通知",
+              "default": true
+            },
+            "badges": {
+              "type": "boolean",
+              "description": "是否支持角标",
+              "default": true
+            }
+          }
+        },
+        "camera": {
+          "type": "object",
+          "description": "相机配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用相机",
+              "default": false
+            },
+            "gallery": {
+              "type": "boolean",
+              "description": "是否支持相册",
+              "default": true
+            },
+            "permissions": {
+              "type": "array",
+              "description": "所需权限",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "camera",
+                  "storage",
+                  "microphone"
+                ]
+              },
+              "default": [
+                "camera",
+                "storage"
+              ]
+            }
+          }
+        },
+        "location": {
+          "type": "object",
+          "description": "位置服务配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用位置服务",
+              "default": false
+            },
+            "background": {
+              "type": "boolean",
+              "description": "是否支持后台定位",
+              "default": false
+            },
+            "accuracy": {
+              "type": "string",
+              "description": "定位精度",
+              "enum": [
+                "lowest",
+                "low",
+                "medium",
+                "high",
+                "best"
+              ],
+              "default": "high"
+            },
+            "permissions": {
+              "type": "array",
+              "description": "所需权限",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "location",
+                  "location_always",
+                  "location_when_in_use"
+                ]
+              },
+              "default": [
+                "location"
+              ]
+            }
+          }
+        },
+        "payment": {
+          "type": "object",
+          "description": "支付配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用支付",
+              "default": false
+            },
+            "providers": {
+              "type": "array",
+              "description": "支付提供商",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "stripe",
+                  "square",
+                  "paypal",
+                  "alipay",
+                  "wechat",
+                  "apple_pay",
+                  "google_pay"
+                ]
+              }
+            },
+            "inAppPurchase": {
+              "type": "boolean",
+              "description": "是否支持应用内购买",
+              "default": false
+            }
+          }
+        },
+        "social": {
+          "type": "object",
+          "description": "社交功能配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用社交功能",
+              "default": false
+            },
+            "share": {
+              "type": "boolean",
+              "description": "是否支持分享",
+              "default": true
+            },
+            "deepLinks": {
+              "type": "boolean",
+              "description": "是否支持深链接",
+              "default": true
+            }
+          }
+        },
+        "offline": {
+          "type": "object",
+          "description": "离线功能配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否支持离线",
+              "default": true
+            },
+            "caching": {
+              "type": "boolean",
+              "description": "是否启用缓存",
+              "default": true
+            },
+            "syncStrategy": {
+              "type": "string",
+              "description": "同步策略",
+              "enum": [
+                "optimistic",
+                "pessimistic",
+                "manual"
+              ],
+              "default": "optimistic"
+            }
+          }
+        },
+        "biometrics": {
+          "type": "object",
+          "description": "生物识别配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用生物识别",
+              "default": false
+            },
+            "fingerprint": {
+              "type": "boolean",
+              "description": "是否支持指纹",
+              "default": true
+            },
+            "faceId": {
+              "type": "boolean",
+              "description": "是否支持面部识别",
+              "default": true
+            },
+            "fallbackToPin": {
+              "type": "boolean",
+              "description": "是否回退到PIN码",
+              "default": true
+            }
+          }
+        },
+        "sensors": {
+          "type": "object",
+          "description": "传感器配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用传感器",
+              "default": false
+            },
+            "accelerometer": {
+              "type": "boolean",
+              "description": "是否启用加速度计",
+              "default": false
+            },
+            "gyroscope": {
+              "type": "boolean",
+              "description": "是否启用陀螺仪",
+              "default": false
+            },
+            "magnetometer": {
+              "type": "boolean",
+              "description": "是否启用磁力计",
+              "default": false
+            }
+          }
+        },
+        "bluetooth": {
+          "type": "object",
+          "description": "蓝牙配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用蓝牙",
+              "default": false
+            },
+            "lowEnergy": {
+              "type": "boolean",
+              "description": "是否支持低功耗蓝牙",
+              "default": false
+            },
+            "permissions": {
+              "type": "array",
+              "description": "所需权限",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bluetooth",
+                  "bluetooth_admin",
+                  "access_coarse_location"
+                ]
+              },
+              "default": [
+                "bluetooth"
+              ]
+            }
+          }
+        },
+        "fileSystem": {
+          "type": "object",
+          "description": "文件系统配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用文件系统",
+              "default": true
+            },
+            "documentPicker": {
+              "type": "boolean",
+              "description": "是否支持文档选择器",
+              "default": true
+            },
+            "filePicker": {
+              "type": "boolean",
+              "description": "是否支持文件选择器",
+              "default": true
+            },
+            "permissions": {
+              "type": "array",
+              "description": "所需权限",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "storage",
+                  "manage_external_storage"
+                ]
+              },
+              "default": [
+                "storage"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "database": {
+      "type": "object",
+      "description": "数据存储配置",
+      "properties": {
+        "local": {
+          "type": "object",
+          "description": "本地数据库配置",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "本地数据库类型",
+              "enum": [
+                "hive",
+                "sqflite",
+                "shared_preferences",
+                "sembast"
+              ],
+              "default": "hive"
+            },
+            "encryption": {
+              "type": "boolean",
+              "description": "是否加密",
+              "default": false
+            },
+            "backup": {
+              "type": "boolean",
+              "description": "是否备份",
+              "default": false
+            }
+          }
+        },
+        "remote": {
+          "type": "object",
+          "description": "远程数据库配置",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "远程数据库类型",
+              "enum": [
+                "firebase",
+                "supabase",
+                "appwrite",
+                "custom"
+              ],
+              "default": "firebase"
+            },
+            "realtime": {
+              "type": "boolean",
+              "description": "是否实时同步",
+              "default": false
+            },
+            "offline": {
+              "type": "boolean",
+              "description": "是否支持离线",
+              "default": true
+            },
+            "caching": {
+              "type": "boolean",
+              "description": "是否启用缓存",
+              "default": true
+            }
+          }
+        }
+      }
+    },
+    "api": {
+      "type": "object",
+      "description": "网络和API配置",
+      "properties": {
+        "client": {
+          "type": "string",
+          "description": "HTTP客户端",
+          "enum": [
+            "dio",
+            "http",
+            "chopper"
+          ],
+          "default": "dio"
+        },
+        "baseUrl": {
+          "type": "string",
+          "description": "API基础URL",
+          "format": "uri"
+        },
+        "timeout": {
+          "type": "integer",
+          "description": "超时时间(毫秒)",
+          "minimum": 1000,
+          "maximum": 120000,
+          "default": 30000
+        },
+        "retries": {
+          "type": "integer",
+          "description": "重试次数",
+          "minimum": 0,
+          "maximum": 10,
+          "default": 3
+        },
+        "interceptors": {
+          "type": "object",
+          "description": "拦截器配置",
+          "properties": {
+            "logging": {
+              "type": "boolean",
+              "description": "是否启用日志拦截器",
+              "default": true
+            },
+            "auth": {
+              "type": "boolean",
+              "description": "是否启用认证拦截器",
+              "default": true
+            },
+            "cache": {
+              "type": "boolean",
+              "description": "是否启用缓存拦截器",
+              "default": true
+            },
+            "retry": {
+              "type": "boolean",
+              "description": "是否启用重试拦截器",
+              "default": true
+            }
+          }
+        },
+        "serialization": {
+          "type": "string",
+          "description": "序列化方案",
+          "enum": [
+            "json_annotation",
+            "built_value",
+            "freezed"
+          ],
+          "default": "json_annotation"
+        },
+        "mockData": {
+          "type": "object",
+          "description": "模拟数据配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用模拟数据",
+              "default": false
+            },
+            "environment": {
+              "type": "string",
+              "description": "环境",
+              "enum": [
+                "development",
+                "staging",
+                "production"
+              ],
+              "default": "development"
+            }
+          }
+        }
+      }
+    },
+    "build": {
+      "type": "object",
+      "description": "构建配置",
+      "properties": {
+        "android": {
+          "type": "object",
+          "description": "Android构建配置",
+          "properties": {
+            "buildType": {
+              "type": "string",
+              "description": "构建类型",
+              "enum": [
+                "debug",
+                "release"
+              ],
+              "default": "release"
+            },
+            "shrinkResources": {
+              "type": "boolean",
+              "description": "是否压缩资源",
+              "default": true
+            },
+            "minifyEnabled": {
+              "type": "boolean",
+              "description": "是否启用代码混淆",
+              "default": true
+            },
+            "signing": {
+              "type": "object",
+              "description": "签名配置",
+              "properties": {
+                "keystore": {
+                  "type": "string",
+                  "description": "密钥库路径"
+                },
+                "keyAlias": {
+                  "type": "string",
+                  "description": "密钥别名"
+                }
+              }
+            }
+          }
+        },
+        "ios": {
+          "type": "object",
+          "description": "iOS构建配置",
+          "properties": {
+            "configuration": {
+              "type": "string",
+              "description": "构建配置",
+              "enum": [
+                "Debug",
+                "Release"
+              ],
+              "default": "Release"
+            },
+            "codeSign": {
+              "type": "object",
+              "description": "代码签名配置",
+              "properties": {
+                "identity": {
+                  "type": "string",
+                  "description": "签名身份"
+                },
+                "provisioningProfile": {
+                  "type": "string",
+                  "description": "配置文件"
+                }
+              }
+            },
+            "exportMethod": {
+              "type": "string",
+              "description": "导出方法",
+              "enum": [
+                "app-store",
+                "ad-hoc",
+                "enterprise",
+                "development"
+              ],
+              "default": "app-store"
+            }
+          }
+        },
+        "flutter": {
+          "type": "object",
+          "description": "Flutter配置",
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "Flutter版本",
+              "pattern": "^\\d+\\.\\d+\\.\\d+$",
+              "default": "3.16.0"
+            },
+            "channel": {
+              "type": "string",
+              "description": "Flutter渠道",
+              "enum": [
+                "stable",
+                "beta",
+                "dev",
+                "master"
+              ],
+              "default": "stable"
+            },
+            "enabledPlatforms": {
+              "type": "array",
+              "description": "启用的平台",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "android",
+                  "ios",
+                  "web",
+                  "windows",
+                  "macos",
+                  "linux"
+                ]
+              },
+              "default": [
+                "android",
+                "ios"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "analytics": {
+      "type": "object",
+      "description": "数据分析配置",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "是否启用分析",
+          "default": false
+        },
+        "provider": {
+          "type": "string",
+          "description": "分析提供商",
+          "enum": [
+            "firebase",
+            "mixpanel",
+            "amplitude",
+            "custom"
+          ],
+          "default": "firebase"
+        },
+        "crashlytics": {
+          "type": "boolean",
+          "description": "是否启用崩溃分析",
+          "default": true
+        },
+        "performance": {
+          "type": "boolean",
+          "description": "是否启用性能监控",
+          "default": true
+        },
+        "customEvents": {
+          "type": "boolean",
+          "description": "是否支持自定义事件",
+          "default": true
+        },
+        "userProperties": {
+          "type": "boolean",
+          "description": "是否收集用户属性",
+          "default": true
+        },
+        "anonymizeData": {
+          "type": "boolean",
+          "description": "是否匿名化数据",
+          "default": true
+        }
+      }
+    },
+    "localization": {
+      "type": "object",
+      "description": "国际化配置",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "是否启用国际化",
+          "default": false
+        },
+        "defaultLocale": {
+          "type": "string",
+          "description": "默认语言",
+          "pattern": "^[a-z]{2}_[A-Z]{2}$",
+          "default": "zh_CN"
+        },
+        "supportedLocales": {
+          "type": "array",
+          "description": "支持的语言",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z]{2}_[A-Z]{2}$"
+          },
+          "default": [
+            "zh_CN",
+            "en_US"
+          ]
+        },
+        "fallbackLocale": {
+          "type": "string",
+          "description": "回退语言",
+          "pattern": "^[a-z]{2}_[A-Z]{2}$",
+          "default": "en_US"
+        },
+        "arb": {
+          "type": "object",
+          "description": "ARB配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用ARB",
+              "default": true
+            },
+            "outputDir": {
+              "type": "string",
+              "description": "输出目录",
+              "default": "lib/l10n"
+            }
+          }
+        }
+      }
+    },
+    "testing": {
+      "type": "object",
+      "description": "测试配置",
+      "properties": {
+        "unitTests": {
+          "type": "object",
+          "description": "单元测试配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用单元测试",
+              "default": true
+            },
+            "coverage": {
+              "type": "boolean",
+              "description": "是否启用覆盖率",
+              "default": true
+            },
+            "mockData": {
+              "type": "boolean",
+              "description": "是否使用模拟数据",
+              "default": true
+            }
+          }
+        },
+        "widgetTests": {
+          "type": "object",
+          "description": "组件测试配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用组件测试",
+              "default": true
+            },
+            "goldenTests": {
+              "type": "boolean",
+              "description": "是否启用黄金测试",
+              "default": false
+            }
+          }
+        },
+        "integrationTests": {
+          "type": "object",
+          "description": "集成测试配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用集成测试",
+              "default": true
+            },
+            "e2e": {
+              "type": "boolean",
+              "description": "是否启用端到端测试",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "ci": {
+      "type": "object",
+      "description": "持续集成配置",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "是否启用CI",
+          "default": false
+        },
+        "provider": {
+          "type": "string",
+          "description": "CI提供商",
+          "enum": [
+            "github_actions",
+            "gitlab_ci",
+            "jenkins",
+            "travis_ci",
+            "circleci"
+          ],
+          "default": "github_actions"
+        },
+        "buildOnPush": {
+          "type": "boolean",
+          "description": "是否在推送时构建",
+          "default": true
+        },
+        "testOnPush": {
+          "type": "boolean",
+          "description": "是否在推送时测试",
+          "default": true
+        },
+        "deployOnTag": {
+          "type": "boolean",
+          "description": "是否在标签时部署",
+          "default": true
+        }
+      }
+    },
+    "performance": {
+      "type": "object",
+      "description": "性能配置",
+      "properties": {
+        "optimization": {
+          "type": "object",
+          "description": "优化配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用优化",
+              "default": true
+            },
+            "imageCompression": {
+              "type": "boolean",
+              "description": "是否压缩图片",
+              "default": true
+            },
+            "bundleSize": {
+              "type": "boolean",
+              "description": "是否优化包大小",
+              "default": true
+            },
+            "lazyLoading": {
+              "type": "boolean",
+              "description": "是否懒加载",
+              "default": true
+            }
+          }
+        },
+        "monitoring": {
+          "type": "object",
+          "description": "监控配置",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "是否启用监控",
+              "default": false
+            },
+            "fps": {
+              "type": "boolean",
+              "description": "是否监控FPS",
+              "default": true
+            },
+            "memory": {
+              "type": "boolean",
+              "description": "是否监控内存",
+              "default": true
+            },
+            "network": {
+              "type": "boolean",
+              "description": "是否监控网络",
+              "default": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

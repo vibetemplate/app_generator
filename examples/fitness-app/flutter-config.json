@@ -1,0 +1,223 @@
+{
+  "app": {
+    "name": "FitnessApp",
+    "displayName": "健康运动",
+    "description": "专业的健康管理应用，支持运动跟踪、健康数据分析和社区分享",
+    "version": "1.5.2",
+    "bundleId": "com.vibetemplate.fitnessapp",
+    "author": "VibeTemplate",
+    "homepage": "https://github.com/vibetemplate/fitnessapp",
+    "keywords": ["fitness", "health", "sports", "tracker"],
+    "category": "health"
+  },
+  "platform": {
+    "android": {
+      "enabled": true,
+      "minSdkVersion": 24,
+      "targetSdkVersion": 34,
+      "compileSdkVersion": 34,
+      "applicationId": "com.vibetemplate.fitnessapp",
+      "versionCode": 152,
+      "supportedABIs": ["arm64-v8a", "armeabi-v7a"]
+    },
+    "ios": {
+      "enabled": true,
+      "deploymentTarget": "14.0",
+      "bundleIdentifier": "com.vibetemplate.fitnessapp",
+      "supportedDevices": ["iphone"]
+    },
+    "web": {
+      "enabled": false
+    },
+    "desktop": {
+      "enabled": false
+    }
+  },
+  "ui": {
+    "theme": "material3",
+    "primaryColor": "#4CAF50",
+    "secondaryColor": "#8BC34A",
+    "backgroundColor": "#F1F8E9",
+    "surfaceColor": "#FFFFFF",
+    "supportDarkMode": true,
+    "fontFamily": "Roboto",
+    "iconTheme": "material",
+    "appBarStyle": "transparent",
+    "navigationStyle": "bottom",
+    "responsiveLayout": true,
+    "animations": {
+      "enabled": true,
+      "duration": 400,
+      "curve": "bounceOut"
+    }
+  },
+  "stateManagement": {
+    "type": "provider",
+    "globalState": true,
+    "persistence": true,
+    "devTools": true
+  },
+  "features": {
+    "authentication": {
+      "enabled": true,
+      "providers": ["email", "google", "apple"],
+      "biometrics": true,
+      "twoFactor": false
+    },
+    "push": {
+      "enabled": true,
+      "provider": "firebase",
+      "localNotifications": true,
+      "badges": true
+    },
+    "camera": {
+      "enabled": true,
+      "gallery": true,
+      "permissions": ["camera", "storage"]
+    },
+    "location": {
+      "enabled": true,
+      "background": true,
+      "accuracy": "best",
+      "permissions": ["location_always", "location_when_in_use"]
+    },
+    "payment": {
+      "enabled": true,
+      "providers": ["stripe", "apple_pay", "google_pay"],
+      "inAppPurchase": true
+    },
+    "social": {
+      "enabled": true,
+      "share": true,
+      "deepLinks": true
+    },
+    "offline": {
+      "enabled": true,
+      "caching": true,
+      "syncStrategy": "manual"
+    },
+    "biometrics": {
+      "enabled": true,
+      "fingerprint": true,
+      "faceId": true,
+      "fallbackToPin": true
+    },
+    "sensors": {
+      "enabled": true,
+      "accelerometer": true,
+      "gyroscope": true,
+      "magnetometer": false
+    },
+    "fileSystem": {
+      "enabled": true,
+      "documentPicker": false,
+      "filePicker": false,
+      "permissions": ["storage"]
+    }
+  },
+  "database": {
+    "local": {
+      "type": "sqflite",
+      "encryption": false,
+      "backup": true
+    },
+    "remote": {
+      "type": "supabase",
+      "realtime": false,
+      "offline": true,
+      "caching": true
+    }
+  },
+  "api": {
+    "client": "dio",
+    "baseUrl": "https://api.fitnessapp.com",
+    "timeout": 45000,
+    "retries": 3,
+    "interceptors": {
+      "logging": true,
+      "auth": true,
+      "cache": true,
+      "retry": true
+    },
+    "serialization": "json_annotation",
+    "mockData": {
+      "enabled": false,
+      "environment": "production"
+    }
+  },
+  "build": {
+    "android": {
+      "buildType": "release",
+      "shrinkResources": true,
+      "minifyEnabled": true,
+      "signing": {
+        "keystore": "android/app/fitness-release-key.keystore",
+        "keyAlias": "fitness-key"
+      }
+    },
+    "ios": {
+      "configuration": "Release",
+      "exportMethod": "app-store"
+    },
+    "flutter": {
+      "version": "3.16.0",
+      "channel": "stable",
+      "enabledPlatforms": ["android", "ios"]
+    }
+  },
+  "analytics": {
+    "enabled": true,
+    "provider": "firebase",
+    "crashlytics": true,
+    "performance": true,
+    "customEvents": true,
+    "userProperties": true,
+    "anonymizeData": false
+  },
+  "localization": {
+    "enabled": true,
+    "defaultLocale": "zh_CN",
+    "supportedLocales": ["zh_CN", "en_US", "ja_JP"],
+    "fallbackLocale": "en_US",
+    "arb": {
+      "enabled": true,
+      "outputDir": "lib/l10n"
+    }
+  },
+  "testing": {
+    "unitTests": {
+      "enabled": true,
+      "coverage": true,
+      "mockData": true
+    },
+    "widgetTests": {
+      "enabled": true,
+      "goldenTests": false
+    },
+    "integrationTests": {
+      "enabled": true,
+      "e2e": false
+    }
+  },
+  "ci": {
+    "enabled": true,
+    "provider": "github_actions",
+    "buildOnPush": true,
+    "testOnPush": true,
+    "deployOnTag": true
+  },
+  "performance": {
+    "optimization": {
+      "enabled": true,
+      "imageCompression": true,
+      "bundleSize": true,
+      "lazyLoading": true
+    },
+    "monitoring": {
+      "enabled": true,
+      "fps": true,
+      "memory": true,
+      "network": true
+    }
+  }
+}

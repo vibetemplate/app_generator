@@ -1,0 +1,210 @@
+{
+  "app": {
+    "name": "ChatApp",
+    "displayName": "即时聊天",
+    "description": "现代化即时通讯应用，支持文字、语音、视频聊天和群组功能",
+    "version": "2.1.0",
+    "bundleId": "com.vibetemplate.chatapp",
+    "author": "VibeTemplate",
+    "homepage": "https://github.com/vibetemplate/chatapp",
+    "keywords": ["chat", "messaging", "social", "flutter"],
+    "category": "social"
+  },
+  "platform": {
+    "android": {
+      "enabled": true,
+      "minSdkVersion": 23,
+      "targetSdkVersion": 34,
+      "compileSdkVersion": 34,
+      "applicationId": "com.vibetemplate.chatapp",
+      "versionCode": 21,
+      "supportedABIs": ["arm64-v8a", "armeabi-v7a"]
+    },
+    "ios": {
+      "enabled": true,
+      "deploymentTarget": "13.0",
+      "bundleIdentifier": "com.vibetemplate.chatapp",
+      "supportedDevices": ["iphone", "ipad"]
+    },
+    "web": {
+      "enabled": true,
+      "renderer": "canvaskit",
+      "baseHref": "/"
+    },
+    "desktop": {
+      "enabled": false
+    }
+  },
+  "ui": {
+    "theme": "material3",
+    "primaryColor": "#1976D2",
+    "secondaryColor": "#42A5F5",
+    "backgroundColor": "#FAFAFA",
+    "surfaceColor": "#FFFFFF",
+    "supportDarkMode": true,
+    "fontFamily": "Roboto",
+    "iconTheme": "material",
+    "appBarStyle": "normal",
+    "navigationStyle": "bottom",
+    "responsiveLayout": true,
+    "animations": {
+      "enabled": true,
+      "duration": 250,
+      "curve": "easeInOut"
+    }
+  },
+  "stateManagement": {
+    "type": "bloc",
+    "globalState": true,
+    "persistence": true,
+    "devTools": true
+  },
+  "features": {
+    "authentication": {
+      "enabled": true,
+      "providers": ["phone", "email", "google"],
+      "biometrics": true,
+      "twoFactor": true
+    },
+    "push": {
+      "enabled": true,
+      "provider": "firebase",
+      "localNotifications": true,
+      "badges": true
+    },
+    "camera": {
+      "enabled": true,
+      "gallery": true,
+      "permissions": ["camera", "storage", "microphone"]
+    },
+    "location": {
+      "enabled": true,
+      "background": false,
+      "accuracy": "high",
+      "permissions": ["location_when_in_use"]
+    },
+    "payment": {
+      "enabled": false
+    },
+    "social": {
+      "enabled": true,
+      "share": true,
+      "deepLinks": true
+    },
+    "offline": {
+      "enabled": true,
+      "caching": true,
+      "syncStrategy": "optimistic"
+    },
+    "biometrics": {
+      "enabled": true,
+      "fingerprint": true,
+      "faceId": true,
+      "fallbackToPin": true
+    },
+    "fileSystem": {
+      "enabled": true,
+      "documentPicker": true,
+      "filePicker": true,
+      "permissions": ["storage"]
+    }
+  },
+  "database": {
+    "local": {
+      "type": "hive",
+      "encryption": true,
+      "backup": true
+    },
+    "remote": {
+      "type": "firebase",
+      "realtime": true,
+      "offline": true,
+      "caching": true
+    }
+  },
+  "api": {
+    "client": "dio",
+    "baseUrl": "https://api.chatapp.com",
+    "timeout": 15000,
+    "retries": 2,
+    "interceptors": {
+      "logging": true,
+      "auth": true,
+      "cache": false,
+      "retry": true
+    },
+    "serialization": "freezed",
+    "mockData": {
+      "enabled": true,
+      "environment": "development"
+    }
+  },
+  "build": {
+    "android": {
+      "buildType": "release",
+      "shrinkResources": true,
+      "minifyEnabled": true,
+      "signing": {
+        "keystore": "android/app/chatapp-release-key.keystore",
+        "keyAlias": "chatapp-key"
+      }
+    },
+    "ios": {
+      "configuration": "Release",
+      "exportMethod": "app-store"
+    },
+    "flutter": {
+      "version": "3.16.0",
+      "channel": "stable",
+      "enabledPlatforms": ["android", "ios", "web"]
+    }
+  },
+  "analytics": {
+    "enabled": true,
+    "provider": "firebase",
+    "crashlytics": true,
+    "performance": true,
+    "customEvents": true,
+    "userProperties": true,
+    "anonymizeData": true
+  },
+  "localization": {
+    "enabled": true,
+    "defaultLocale": "zh_CN",
+    "supportedLocales": ["zh_CN", "en_US", "ja_JP", "ko_KR"],
+    "fallbackLocale": "en_US",
+    "arb": {
+      "enabled": true,
+      "outputDir": "lib/l10n"
+    }
+  },
+  "testing": {
+    "unitTests": {
+      "enabled": true,
+      "coverage": true,
+      "mockData": true
+    },
+    "widgetTests": {
+      "enabled": true,
+      "goldenTests": true
+    },
+    "integrationTests": {
+      "enabled": true,
+      "e2e": true
+    }
+  },
+  "performance": {
+    "optimization": {
+      "enabled": true,
+      "imageCompression": true,
+      "bundleSize": true,
+      "lazyLoading": true
+    },
+    "monitoring": {
+      "enabled": true,
+      "fps": true,
+      "memory": true,
+      "network": true
+    }
+  }
+}

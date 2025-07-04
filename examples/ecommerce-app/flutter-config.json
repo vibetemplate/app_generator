@@ -1,0 +1,210 @@
+{
+  "app": {
+    "name": "ShopApp",
+    "displayName": "购物商城",
+    "description": "现代化电商购物应用，提供完整的购物体验和便捷的支付功能",
+    "version": "1.0.0",
+    "bundleId": "com.vibetemplate.shopapp",
+    "author": "VibeTemplate",
+    "homepage": "https://github.com/vibetemplate/shopapp",
+    "keywords": ["ecommerce", "shopping", "flutter", "mobile"],
+    "category": "shopping"
+  },
+  "platform": {
+    "android": {
+      "enabled": true,
+      "minSdkVersion": 21,
+      "targetSdkVersion": 34,
+      "compileSdkVersion": 34,
+      "applicationId": "com.vibetemplate.shopapp",
+      "versionCode": 1,
+      "supportedABIs": ["arm64-v8a", "armeabi-v7a"]
+    },
+    "ios": {
+      "enabled": true,
+      "deploymentTarget": "12.0",
+      "bundleIdentifier": "com.vibetemplate.shopapp",
+      "supportedDevices": ["iphone", "ipad"]
+    },
+    "web": {
+      "enabled": false
+    },
+    "desktop": {
+      "enabled": false
+    }
+  },
+  "ui": {
+    "theme": "material3",
+    "primaryColor": "#FF6B35",
+    "secondaryColor": "#FFA726",
+    "backgroundColor": "#FFFFFF",
+    "surfaceColor": "#F5F5F5",
+    "supportDarkMode": true,
+    "fontFamily": "Roboto",
+    "iconTheme": "material",
+    "appBarStyle": "elevated",
+    "navigationStyle": "bottom",
+    "responsiveLayout": true,
+    "animations": {
+      "enabled": true,
+      "duration": 300,
+      "curve": "fastOutSlowIn"
+    }
+  },
+  "stateManagement": {
+    "type": "riverpod",
+    "globalState": true,
+    "persistence": true,
+    "devTools": true
+  },
+  "features": {
+    "authentication": {
+      "enabled": true,
+      "providers": ["email", "google", "apple"],
+      "biometrics": true,
+      "twoFactor": false
+    },
+    "push": {
+      "enabled": true,
+      "provider": "firebase",
+      "localNotifications": true,
+      "badges": true
+    },
+    "camera": {
+      "enabled": true,
+      "gallery": true,
+      "permissions": ["camera", "storage"]
+    },
+    "location": {
+      "enabled": true,
+      "background": false,
+      "accuracy": "medium",
+      "permissions": ["location_when_in_use"]
+    },
+    "payment": {
+      "enabled": true,
+      "providers": ["stripe", "alipay", "wechat", "apple_pay", "google_pay"],
+      "inAppPurchase": false
+    },
+    "social": {
+      "enabled": true,
+      "share": true,
+      "deepLinks": true
+    },
+    "offline": {
+      "enabled": true,
+      "caching": true,
+      "syncStrategy": "optimistic"
+    },
+    "biometrics": {
+      "enabled": true,
+      "fingerprint": true,
+      "faceId": true,
+      "fallbackToPin": true
+    },
+    "fileSystem": {
+      "enabled": true,
+      "documentPicker": false,
+      "filePicker": true,
+      "permissions": ["storage"]
+    }
+  },
+  "database": {
+    "local": {
+      "type": "hive",
+      "encryption": true,
+      "backup": true
+    },
+    "remote": {
+      "type": "firebase",
+      "realtime": true,
+      "offline": true,
+      "caching": true
+    }
+  },
+  "api": {
+    "client": "dio",
+    "baseUrl": "https://api.shopapp.com",
+    "timeout": 30000,
+    "retries": 3,
+    "interceptors": {
+      "logging": true,
+      "auth": true,
+      "cache": true,
+      "retry": true
+    },
+    "serialization": "json_annotation",
+    "mockData": {
+      "enabled": true,
+      "environment": "development"
+    }
+  },
+  "build": {
+    "android": {
+      "buildType": "release",
+      "shrinkResources": true,
+      "minifyEnabled": true,
+      "signing": {
+        "keystore": "android/app/shopapp-release-key.keystore",
+        "keyAlias": "shopapp-key"
+      }
+    },
+    "ios": {
+      "configuration": "Release",
+      "exportMethod": "app-store"
+    },
+    "flutter": {
+      "version": "3.16.0",
+      "channel": "stable",
+      "enabledPlatforms": ["android", "ios"]
+    }
+  },
+  "analytics": {
+    "enabled": true,
+    "provider": "firebase",
+    "crashlytics": true,
+    "performance": true,
+    "customEvents": true,
+    "userProperties": true,
+    "anonymizeData": true
+  },
+  "localization": {
+    "enabled": true,
+    "defaultLocale": "zh_CN",
+    "supportedLocales": ["zh_CN", "en_US", "ja_JP"],
+    "fallbackLocale": "en_US",
+    "arb": {
+      "enabled": true,
+      "outputDir": "lib/l10n"
+    }
+  },
+  "testing": {
+    "unitTests": {
+      "enabled": true,
+      "coverage": true,
+      "mockData": true
+    },
+    "widgetTests": {
+      "enabled": true,
+      "goldenTests": false
+    },
+    "integrationTests": {
+      "enabled": true,
+      "e2e": false
+    }
+  },
+  "performance": {
+    "optimization": {
+      "enabled": true,
+      "imageCompression": true,
+      "bundleSize": true,
+      "lazyLoading": true
+    },
+    "monitoring": {
+      "enabled": true,
+      "fps": true,
+      "memory": true,
+      "network": true
+    }
+  }
+}
